@@ -67,7 +67,6 @@ func main() {
     var requestBody jsoninput
         if err := c.BindJSON(&requestBody); err != nil {
             c.IndentedJSON(http.StatusOK, err.Error())
-            return
         }
         c.IndentedJSON(http.StatusOK, requestBody)
     })
