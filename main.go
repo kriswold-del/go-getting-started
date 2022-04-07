@@ -29,13 +29,13 @@ type Response struct {
 }
 
 func test(w http.ResponseWriter, r *http.Request) {
-    var jsonobj Response
+    var jsonObj Response
     reqBody, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Println(err.Error())
     }
-    json.Unmarshal(reqBody, &newEvent)
-    json.NewEncoder(w).Encode(jsonobj)
+    json.Unmarshal(reqBody, &jsonObj)
+    json.NewEncoder(w).Encode(jsonObj)
     //log.Println(t.bins)
 }
 
