@@ -4,9 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-    "fmt"
 
-    "github.com/bp3d"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
