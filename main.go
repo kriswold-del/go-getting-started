@@ -42,7 +42,7 @@ func test(w http.ResponseWriter, req *http.Request) {
     log.Println(t)
     w.Header().Set("Content-Type", "application/json")
 
-    json.NewEncoder(w).Encode(body)
+    json.NewEncoder(w).Encode(t)
     //log.Println(t.bins)
 }
 
