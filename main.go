@@ -62,6 +62,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
     w.Header().Set("Content-Type", "application/json")
+    w.Header().Set("Access-Control-Allow-Origin", "*")
     json.NewEncoder(w).Encode(p)
     //log.Println(t.bins)
 }
