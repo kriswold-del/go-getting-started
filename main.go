@@ -36,8 +36,9 @@ func test(w http.ResponseWriter, r *http.Request) {
     }
     json.Unmarshal(reqBody, &jsonObj)
 
-    bins := getAttr(&jsonObj, "Bins")
-    log.Println(len(bins))
+    for i := range jsonObj.Bins {
+        log.Println(jsonObj[i].Name)
+    }
 
     w.Header().Set("Content-Type", "application/json")
     json.NewEncoder(w).Encode(jsonObj)
