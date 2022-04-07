@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
-type response struct {
+type Response struct {
 	Bins []struct {
 		Name   string `json:"name"`
 		Width  int    `json:"width"`
