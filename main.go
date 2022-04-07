@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
     "encoding/json"
-    "net/http"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
