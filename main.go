@@ -16,6 +16,10 @@ func main() {
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
+
+
+
+
     p := bp3d.NewPacker()
     p.AddBin(bp3d.NewBin("Small Bin", 10, 15, 20, 100))
 	p.AddBin(bp3d.NewBin("Medium Bin", 100, 150, 200, 1000))
@@ -37,6 +41,16 @@ func main() {
 	router.GET("/", func(c *gin.Context) {
 		 c.JSON(http.StatusOK, p)
 	})
+
+    router.POST("/", func(c *gin.Context) {
+        var payload
+
+        if err := c.BindJSON(&payload); err != nil {
+            return c.IndentedJSON(http.StatusOK, err)
+        }
+
+        c.IndentedJSON(http.StatusOK, payload)
+    })
 
 	router.Run(":" + port)
 }
