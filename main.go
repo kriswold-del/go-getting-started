@@ -71,7 +71,7 @@ func main() {
     router.POST("/", func(c *gin.Context) {
     var postPayLoad payload
         if err := c.BindJSON(&postPayLoad); err != nil {
-            return c.IndentedJSON(http.StatusOK, err)
+            return c.IndentedJSON(http.StatusOK, gin.H{"message": "System Error"})
         }
         c.IndentedJSON(http.StatusOK, payload)
     })
