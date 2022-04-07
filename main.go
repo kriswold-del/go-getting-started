@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
     "encoding/json"
+    "io/ioutil"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
@@ -28,14 +29,17 @@ type Response struct {
 }
 
 func test(rw http.ResponseWriter, req *http.Request) {
-    decoder := json.NewDecoder(req.Body)
-    log.Println(string(req.Body))
+    body, err := ioutil.ReadAll(req.Body)
+    if err != nil {
+        log.Println(err.Error())
+    }
+    log.Println(string(body))
     var r Response
-        err := decoder.Decode(&r)
-        if err != nil {
-            log.Println(err.Error())
-        }
-        log.Println(r.bins)
+    err = json.Unmarshal(body, &r)
+    if err != nil {
+        log.Println(err.Error())
+    }
+    log.Println(r.bins)
 }
 
 func main() {
