@@ -4,6 +4,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+    "encoding/json"
+    "net/http"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
@@ -26,8 +28,35 @@ type Response struct {
     } `json:"data"`
 }
 
+func test(rw http.ResponseWriter, req *http.Request) {
+    req.ParseForm()
+    log.Println(req.Form)
+    //LOG: map[{"test": "that"}:[]]
+    var r Response
+    for key, _ := range req.Form {
+        log.Println(key)
+        //LOG: {"test": "that"}
+        err := json.Unmarshal([]byte(key), &r)
+        if err != nil {
+            log.Println(err.Error())
+        }
+    }
+    log.Println(r)
+    //LOG: that
+}
 
 func main() {
+    port := os.Getenv("PORT")
+	if port == "" {
+		log.Fatal("$PORT must be set")
+	}
+
+    http.HandleFunc("/", test)
+
+    log.Fatal(http.ListenAndServe(":" + port, nil))
+}
+
+func mainold() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
