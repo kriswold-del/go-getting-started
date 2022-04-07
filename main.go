@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"fmt"
 	"net/http"
 	"os"
     "encoding/json"
@@ -33,13 +34,14 @@ func test(rw http.ResponseWriter, req *http.Request) {
     if err != nil {
         log.Println(err.Error())
     }
-    log.Println(string(body))
-    var r Response
-    err = json.Unmarshal(body, &r)
+    //log.Println(string(body))
+    var t Response
+    err = json.Unmarshal(body, &t)
     if err != nil {
         log.Println(err.Error())
     }
-    log.Println(r.bins)
+    fmt.Fprintf(w, string(t))
+    //log.Println(t.bins)
 }
 
 func main() {
