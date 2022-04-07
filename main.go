@@ -11,27 +11,27 @@ import (
 )
 
 type bin struct {
-    Name    string
-    Width   float64
-    Height  float64
-    Depth   float64
-    MaxWeight   float64
+    Name    string  `json:"name"`
+    Width   float64  `json:"width"`
+    Height  float64  `json:"height"`
+    Depth   float64  `json:"depth"`
+    Weight   float64  `json:"weight"`
 }
 var bins []bin
 
 type item struct {
-    Name    string
-    Width   float64
-    Height  float64
-    Depth   float64
-    Weight  float64
+    Name    string  `json:"name"`
+    Width   float64 `json:"width"`
+    Height  float64 `json:"height"`
+    Depth   float64 `json:"depth"`
+    Weight  float64 `json:"weight"`
 }
 
 var items []item
 
 type jsoninput struct {
-    bins    bin
-    items   item
+    bins    bin `json:"bins"`
+    items   item    `json:"items"`
 }
 
 var payload []jsoninput
@@ -73,6 +73,5 @@ func main() {
         }
         c.IndentedJSON(http.StatusOK, payload)
     })
-
 	router.Run(":" + port)
 }
