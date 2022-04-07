@@ -36,7 +36,7 @@ func test(w http.ResponseWriter, r *http.Request) {
     }
     json.Unmarshal(reqBody, &jsonObj)
 
-    log.Println(jsonObj[0].Bins)
+    log.Println(jsonObj.Bins)
 //     for i := range jsonObj.Bins {
 //         log.Println(jsonObj[i].Name)
 //     }
