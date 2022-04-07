@@ -29,11 +29,11 @@ type item struct {
 
 var items []item
 
-
 type jsoninput struct {
     bins    bins
     items   items
 }
+
 var payload []jsoninput
 
 func main() {
@@ -73,7 +73,6 @@ func main() {
         if err := c.BindJSON(&postPayLoad); err != nil {
             return c.IndentedJSON(http.StatusOK, err)
         }
-        var payload = []
         c.IndentedJSON(http.StatusOK, payload)
     })
 
