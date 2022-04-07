@@ -29,7 +29,7 @@ type Response struct {
     } `json:"data"`
 }
 
-func test(rw http.ResponseWriter, req *http.Request) {
+func test(w http.ResponseWriter, req *http.Request) {
     body, err := ioutil.ReadAll(req.Body)
     if err != nil {
         log.Println(err.Error())
