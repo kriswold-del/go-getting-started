@@ -67,8 +67,9 @@ func main() {
     var requestBody jsoninput
         if err := c.BindJSON(&requestBody); err != nil {
             c.IndentedJSON(http.StatusOK, err.Error())
+            return
         }
-        c.IndentedJSON(http.StatusOK, requestBody)
+        c.IndentedJSON(http.StatusOK, requestBody.bins)
     })
 	router.Run(":" + port)
 }
