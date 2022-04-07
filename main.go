@@ -18,14 +18,14 @@ type Response struct {
         Height  float64  `json:"height" binding:"required"`
         Depth   float64  `json:"depth" binding:"required"`
         Weight   float64  `json:"weight" binding:"required"`
-    } `json:"data"`
+    } `json:"bins"`
     items    []struct {
         Name    string  `json:"name" binding:"required"`
         Width   float64 `json:"width" binding:"required"`
         Height  float64 `json:"height" binding:"required"`
         Depth   float64 `json:"depth" binding:"required"`
         Weight  float64 `json:"weight" binding:"required"`
-    } `json:"data"`
+    } `json:"items"`
 }
 
 func test(w http.ResponseWriter, r *http.Request) {
