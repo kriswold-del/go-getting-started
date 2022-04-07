@@ -30,7 +30,7 @@ type Response struct {
 func test(rw http.ResponseWriter, req *http.Request) {
     decoder := json.NewDecoder(req.Body)
     var r Response
-        err := decoder.Decode(&tr
+        err := decoder.Decode(&r)
         if err != nil {
             log.Println(err.Error())
         }
