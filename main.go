@@ -14,17 +14,17 @@ import (
 type Response struct {
 	Bins []struct {
 		Name   string `json:"name"`
-		Width  int    `json:"width"`
-		Height int    `json:"height"`
-		Depth  int    `json:"depth"`
-		Weight int    `json:"weight"`
+		Width  float64    `json:"width"`
+		Height float64    `json:"height"`
+		Depth  float64    `json:"depth"`
+		Weight float64    `json:"weight"`
 	} `json:"bins"`
 	Items []struct {
 		Name   string `json:"name"`
-		Width  int    `json:"width"`
-		Height int    `json:"height"`
-		Depth  int    `json:"depth"`
-		Weight int    `json:"weight"`
+		Width  float64    `json:"width"`
+		Height float64    `json:"height"`
+		Depth  float64    `json:"depth"`
+		Weight float64    `json:"weight"`
 	} `json:"items"`
 }
 
