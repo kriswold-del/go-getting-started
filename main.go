@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"os"
     "fmt"
-    "log"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
