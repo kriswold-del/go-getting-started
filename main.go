@@ -64,12 +64,12 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-    var requestBody:=jsoninput{}
+    var requestBody jsoninput
         if err := c.BindJSON(&requestBody); err != nil {
             c.IndentedJSON(http.StatusOK, err.Error())
             return
         }
-        c.IndentedJSON(http.StatusOK, &requestBody)
+        c.IndentedJSON(http.StatusOK, requestBody)
     })
 	router.Run(":" + port)
 }
