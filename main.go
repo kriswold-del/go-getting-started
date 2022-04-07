@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 
+    "github.com/bp3d"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
@@ -15,6 +16,7 @@ func main() {
 	if port == "" {
 		log.Fatal("$PORT must be set")
 	}
+    p := bp3d.NewPacker()
 
 	router := gin.New()
 	router.Use(gin.Logger())
@@ -22,7 +24,7 @@ func main() {
 	router.Static("/static", "static")
 
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index", nil)
+		c.HTML(http.StatusOK, "index.tmpl.html", nil)
 	})
 
 	router.Run(":" + port)
