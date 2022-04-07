@@ -43,12 +43,12 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-        var payload
+        var newpayload payload
 
         if err := c.BindJSON(&payload); err != nil {
             return c.IndentedJSON(http.StatusOK, err)
         }
-
+        payload = append(payload, newpayload)
         c.IndentedJSON(http.StatusOK, payload)
     })
 
