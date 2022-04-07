@@ -71,7 +71,7 @@ func main() {
             c.IndentedJSON(http.StatusOK, err)
             return
         }
-        c.IndentedJSON(http.StatusOK, payload)
+        c.IndentedJSON(http.StatusOK, requestBody)
     })
 	router.Run(":" + port)
 }
