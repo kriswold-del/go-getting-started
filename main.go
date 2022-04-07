@@ -4,35 +4,30 @@ import (
 	"log"
 	"net/http"
 	"os"
+    "encoding/json"
+    "fmt"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
-
-type bin struct {
-    Name    string  `json:"name" binding:"required"`
-    Width   float64  `json:"width" binding:"required"`
-    Height  float64  `json:"height" binding:"required"`
-    Depth   float64  `json:"depth" binding:"required"`
-    Weight   float64  `json:"weight" binding:"required"`
+type Response struct {
+    bins    []struct {
+        Name    string  `json:"name" binding:"required"`
+        Width   float64  `json:"width" binding:"required"`
+        Height  float64  `json:"height" binding:"required"`
+        Depth   float64  `json:"depth" binding:"required"`
+        Weight   float64  `json:"weight" binding:"required"`
+    } `json:"data"`
+    items    []struct {
+        Name    string  `json:"name" binding:"required"`
+        Width   float64 `json:"width" binding:"required"`
+        Height  float64 `json:"height" binding:"required"`
+        Depth   float64 `json:"depth" binding:"required"`
+        Weight  float64 `json:"weight" binding:"required"`
+    } `json:"data"`
 }
-var bins []bin
 
-type item struct {
-    Name    string  `json:"name" binding:"required"`
-    Width   float64 `json:"width" binding:"required"`
-    Height  float64 `json:"height" binding:"required"`
-    Depth   float64 `json:"depth" binding:"required"`
-    Weight  float64 `json:"weight" binding:"required"`
-}
-
-var items []item
-
-type jsoninput struct {
-    bins    bin `json:"bins"`
-    items   item    `json:"items"`
-}
 
 func main() {
 	port := os.Getenv("PORT")
@@ -64,12 +59,11 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-    var requestBody jsoninput
-        if err := c.BindJSON(&requestBody); err != nil {
-            c.IndentedJSON(http.StatusOK, err.Error())
-            return
-        }
-        c.IndentedJSON(http.StatusOK, requestBody)
+    var result Response
+    if err := json.Unmarshal(body, &result); err != nil {  // Parse []byte to the go struct pointer
+        fmt.Println("Can not unmarshal JSON")
+    }
+        c.IndentedJSON(http.StatusOK, result)
     })
 	router.Run(":" + port)
 }
