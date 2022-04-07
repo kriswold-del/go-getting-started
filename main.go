@@ -11,20 +11,20 @@ import (
 )
 
 type bin struct {
-    Name    string  `json:"name"`
-    Width   float64  `json:"width"`
-    Height  float64  `json:"height"`
-    Depth   float64  `json:"depth"`
-    Weight   float64  `json:"weight"`
+    Name    string  `json:"name" binding:"required"`
+    Width   float64  `json:"width" binding:"required"`
+    Height  float64  `json:"height" binding:"required"`
+    Depth   float64  `json:"depth" binding:"required"`
+    Weight   float64  `json:"weight" binding:"required"`
 }
 var bins []bin
 
 type item struct {
-    Name    string  `json:"name"`
-    Width   float64 `json:"width"`
-    Height  float64 `json:"height"`
-    Depth   float64 `json:"depth"`
-    Weight  float64 `json:"weight"`
+    Name    string  `json:"name" binding:"required"`
+    Width   float64 `json:"width" binding:"required"`
+    Height  float64 `json:"height" binding:"required"`
+    Depth   float64 `json:"depth" binding:"required"`
+    Weight  float64 `json:"weight" binding:"required"`
 }
 
 var items []item
@@ -66,7 +66,7 @@ func main() {
     router.POST("/", func(c *gin.Context) {
     var requestBody jsoninput
         if err := c.BindJSON(&requestBody); err != nil {
-            c.IndentedJSON(http.StatusOK, err)
+            c.IndentedJSON(http.StatusOK, err.Error())
             return
         }
         c.IndentedJSON(http.StatusOK, requestBody)
