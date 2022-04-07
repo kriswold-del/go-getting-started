@@ -55,8 +55,7 @@ func test(w http.ResponseWriter, r *http.Request) {
             jsonObj.Items[i].Height,
             jsonObj.Items[i].Depth,
             jsonObj.Items[i].Weight))
-
-            log.Println("Added Item " + jsonObj.Bins[i].Name)
+            log.Println("Added Item " + jsonObj.Items[i].Name)
         }
 
 	if err := p.Pack(); err != nil {
