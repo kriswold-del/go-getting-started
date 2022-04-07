@@ -49,7 +49,7 @@ func test(w http.ResponseWriter, r *http.Request) {
     }
 
         for i := range jsonObj.Items {
-            p.AddItem(bp3d.NewBin(
+            p.AddItem(bp3d.NewItem(
             jsonObj.Items[i].Name,
             jsonObj.Items[i].Width,
             jsonObj.Items[i].Height,
