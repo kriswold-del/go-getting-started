@@ -39,6 +39,7 @@ func test(w http.ResponseWriter, req *http.Request) {
     if err != nil {
         log.Println(err.Error())
     }
+    log.Println(t)
     w.Header().Set("Content-Type", "application/json")
 
     json.NewEncoder(w).Encode(t)
