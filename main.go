@@ -60,9 +60,10 @@ func main() {
 
     router.POST("/", func(c *gin.Context) {
     var result Response
-    if err := json.Unmarshal(body, &result); err != nil {  // Parse []byte to the go struct pointer
-        fmt.Println("Can not unmarshal JSON")
-    }
+        if err := c.BindJSON(&result); err != nil {
+            c.IndentedJSON(http.StatusOK, err.Error())
+            return
+        }
         c.IndentedJSON(http.StatusOK, result)
     })
 	router.Run(":" + port)
