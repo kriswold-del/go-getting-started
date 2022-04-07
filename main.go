@@ -28,20 +28,14 @@ type Response struct {
 }
 
 func test(rw http.ResponseWriter, req *http.Request) {
-    req.ParseForm()
-    log.Println(req.Form)
-    //LOG: map[{"test": "that"}:[]]
+    decoder := json.NewDecoder(req.Body)
     var r Response
-    for key, _ := range req.Form {
-        log.Println(key)
-        //LOG: {"test": "that"}
-        err := json.Unmarshal([]byte(key), &r)
+        err := decoder.Decode(&r)
         if err != nil {
-            log.Println(err.Error())
+            Println(err.Error())
         }
-    }
-    log.Println(r)
-    //LOG: that
+        log.Println(r)
+
 }
 
 func main() {
