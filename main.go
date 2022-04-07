@@ -66,8 +66,8 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-    //var postPayLoad jsoninput
-        if err := c.BindJSON(&payload); err != nil {
+    var requestBody payload
+        if err := c.BindJSON(&requestBody); err != nil {
             c.IndentedJSON(http.StatusOK, err)
             return
         }
