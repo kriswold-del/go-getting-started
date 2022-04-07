@@ -10,15 +10,16 @@ import (
 	_ "github.com/heroku/x/hmetrics/onload"
 )
 
-type bins struct {
+type bin struct {
     Name    string
     Width   float64
     Height  float64
     Depth   float64
     MaxWeight   float64
 }
+var bins []bin
 
-type items struct {
+type item struct {
     Name    string
     Width   float64
     Height  float64
@@ -26,10 +27,14 @@ type items struct {
     Weight  float64
 }
 
-type payload struct {
+var items []item
+
+
+type jsoninput struct {
     bins    bins
     items   items
 }
+var payload []jsoninput
 
 func main() {
 	port := os.Getenv("PORT")
@@ -64,10 +69,11 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-        if err := c.BindJSON(&payload); err != nil {
+    var postPayLoad payload
+        if err := c.BindJSON(&postPayLoad); err != nil {
             return c.IndentedJSON(http.StatusOK, err)
         }
-
+        var payload = []
         c.IndentedJSON(http.StatusOK, payload)
     })
 
