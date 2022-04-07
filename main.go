@@ -11,24 +11,24 @@ import (
 )
 
 type payload struct {
-    bins    bins  `json:"Bins"`
-    items   items  `json:"Items"`
+    bins    bins
+    items   items
 }
 
 type bins struct {
-    Name    string  `json:"name"`
-    Width   float64  `json:"title"`
-    Height  float64  `json:"artist"`
-    Depth   float64 `json:"price"`
-    MaxWeight   float64 `json:"price"`
+    Name    string
+    Width   float64
+    Height  float64
+    Depth   float64
+    MaxWeight   float64
 }
 
 type items struct {
-    Name    string  `json:"Name"`
-    Width   float64 `json:"Width"`
-    Height  float64 `json:"Height"`
-    Depth   float64 `json:"Depth"`
-    Weight  float64 `json:"Weight"`
+    Name    string
+    Width   float64
+    Height  float64
+    Depth   float64
+    Weight  float64
 }
 
 func main() {
