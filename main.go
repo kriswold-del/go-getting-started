@@ -7,7 +7,7 @@ import (
     "fmt"
     "log"
 
-    "github.com/gedex/bp3d"
+    "github.com/bp3d"
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
