@@ -28,21 +28,14 @@ type Response struct {
     } `json:"data"`
 }
 
-func test(w http.ResponseWriter, req *http.Request) {
-    body, err := ioutil.ReadAll(req.Body)
+func test(w http.ResponseWriter, r *http.Request) {
+    var jsonobj Response
+    reqBody, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Println(err.Error())
     }
-    //log.Println(string(body))
-    var t Response
-    err = json.Unmarshal(body, &t)
-    if err != nil {
-        log.Println(err.Error())
-    }
-    log.Println(t)
-    w.Header().Set("Content-Type", "application/json")
-
-    json.NewEncoder(w).Encode(t)
+    json.Unmarshal(reqBody, &newEvent)
+    json.NewEncoder(w).Encode(jsonobj)
     //log.Println(t.bins)
 }
 
