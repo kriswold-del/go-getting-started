@@ -34,7 +34,7 @@ func test(rw http.ResponseWriter, req *http.Request) {
         if err != nil {
             log.Println(err.Error())
         }
-        log.Println(r)
+        log.Println(r.bins)
 }
 
 func main() {
