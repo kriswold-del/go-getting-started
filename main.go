@@ -11,31 +11,22 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/heroku/x/hmetrics/onload"
 )
-type Response struct {
-    bins    []struct {
-        Name    string  `json:"name" binding:"required"`
-        Width   float64  `json:"width" binding:"required"`
-        Height  float64  `json:"height" binding:"required"`
-        Depth   float64  `json:"depth" binding:"required"`
-        Weight   float64  `json:"weight" binding:"required"`
-    } `json:"bins"`
-    items    []struct {
-        Name    string  `json:"name" binding:"required"`
-        Width   float64 `json:"width" binding:"required"`
-        Height  float64 `json:"height" binding:"required"`
-        Depth   float64 `json:"depth" binding:"required"`
-        Weight  float64 `json:"weight" binding:"required"`
-    } `json:"items"`
+type response struct {
+	Bins []struct {
+		Name   string `json:"name"`
+		Width  int    `json:"width"`
+		Height int    `json:"height"`
+		Depth  int    `json:"depth"`
+		Weight int    `json:"weight"`
+	} `json:"bins"`
+	Items []struct {
+		Name   string `json:"name"`
+		Width  int    `json:"width"`
+		Height int    `json:"height"`
+		Depth  int    `json:"depth"`
+		Weight int    `json:"weight"`
+	} `json:"items"`
 }
-
-testResponse := Response{
-"bins":[
-{"name":"bin2","width":60,"height":60,"depth":60,"weight":40},
-{"name":"bin2","width":100,"height":100,"depth":100,"weight":100}],
-"items":[
-{"name":"item1","width":20,"height":20,"depth":20,"weight":10},
-{"name":"item2","width":20,"height":20,"depth":20,"weight":10},
-{"name":"item3","width":20,"height":20,"depth":20,"weight":10}]}
 
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
@@ -43,14 +34,8 @@ func test(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         log.Println(err.Error())
     }
-
-    var jsonData []byte
-    jsonData, err := json.Marshal(testResponse)
-    if err != nil {
-        log.Println(err)
-    }
-
     json.Unmarshal(reqBody, &jsonObj)
+
     json.NewEncoder(w).Encode(jsonObj)
     //log.Println(t.bins)
 }
