@@ -4,8 +4,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-    "encoding/json"
-    "fmt"
 
     "github.com/bp3d"
 	"github.com/gin-gonic/gin"
