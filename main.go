@@ -43,9 +43,6 @@ func main() {
 		log.Fatal("$PORT must be set")
 	}
 
-
-
-
     p := bp3d.NewPacker()
     p.AddBin(bp3d.NewBin("Small Bin", 10, 15, 20, 100))
 	p.AddBin(bp3d.NewBin("Medium Bin", 100, 150, 200, 1000))
