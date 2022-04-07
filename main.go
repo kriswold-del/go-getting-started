@@ -30,6 +30,7 @@ type Response struct {
 
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
+    p := bp3d.NewPacker()
     reqBody, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Println(err.Error())
@@ -37,11 +38,32 @@ func test(w http.ResponseWriter, r *http.Request) {
     json.Unmarshal(reqBody, &jsonObj)
 
     for i := range jsonObj.Bins {
-        log.Println(jsonObj.Bins[i].Name)
+        p.AddBin(bp3d.NewBin(
+        jsonObj.Bins[i].Name,
+        jsonObj.Bins[i].Width,
+        jsonObj.Bins[i].Height,
+        jsonObj.Bins[i].Depth,
+        jsonObj.Bins[i].Weight))
+
+        log.Println("Added bin " + jsonObj.Bins[i].Name)
     }
 
+        for i := range jsonObj.Items {
+            p.AddItem(bp3d.NewBin(
+            jsonObj.Items[i].Name,
+            jsonObj.Items[i].Width,
+            jsonObj.Items[i].Height,
+            jsonObj.Items[i].Depth,
+            jsonObj.Items[i].Weight))
+
+            log.Println("Added Item " + jsonObj.Bins[i].Name)
+        }
+
+	if err := p.Pack(); err != nil {
+		log.Fatal(err)
+	}
     w.Header().Set("Content-Type", "application/json")
-    json.NewEncoder(w).Encode(jsonObj)
+    json.NewEncoder(w).Encode(p)
     //log.Println(t.bins)
 }
 
