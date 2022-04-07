@@ -34,8 +34,6 @@ type jsoninput struct {
     items   item    `json:"items"`
 }
 
-var payload []jsoninput
-
 func main() {
 	port := os.Getenv("PORT")
 
@@ -66,7 +64,7 @@ func main() {
 	})
 
     router.POST("/", func(c *gin.Context) {
-    var requestBody payload
+    var requestBody jsoninput
         if err := c.BindJSON(&requestBody); err != nil {
             c.IndentedJSON(http.StatusOK, err)
             return
