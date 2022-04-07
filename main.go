@@ -28,12 +28,28 @@ type Response struct {
     } `json:"items"`
 }
 
+testResponse := Response{
+"bins":[
+{"name":"bin2","width":60,"height":60,"depth":60,"weight":40},
+{"name":"bin2","width":100,"height":100,"depth":100,"weight":100}],
+"items":[
+{"name":"item1","width":20,"height":20,"depth":20,"weight":10},
+{"name":"item2","width":20,"height":20,"depth":20,"weight":10},
+{"name":"item3","width":20,"height":20,"depth":20,"weight":10}]}
+
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
     reqBody, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Println(err.Error())
     }
+
+    var jsonData []byte
+    jsonData, err := json.Marshal(testResponse)
+    if err != nil {
+        log.Println(err)
+    }
+
     json.Unmarshal(reqBody, &jsonObj)
     json.NewEncoder(w).Encode(jsonObj)
     //log.Println(t.bins)
