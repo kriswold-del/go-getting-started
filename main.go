@@ -30,8 +30,8 @@ type item struct {
 var items []item
 
 type jsoninput struct {
-    bins    bins
-    items   items
+    bins    bin
+    items   item
 }
 
 var payload []jsoninput
