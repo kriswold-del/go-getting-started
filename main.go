@@ -27,8 +27,6 @@ func main() {
 	// Pack items to bins.
 	if err := p.Pack(); err != nil {
 		log.Fatal(err)
-	}else{
-	    log.Info(p.Bins)
 	}
 
 	router := gin.New()
