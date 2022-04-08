@@ -44,7 +44,6 @@ func test(w http.ResponseWriter, r *http.Request) {
             return (jsonObj.Bins[i].Width * jsonObj.Bins[i].Height * jsonObj.Bins[i].Depth) > (jsonObj.Bins[j].Width * jsonObj.Bins[j].Height * jsonObj.Bins[j].Depth)
     })
     for i := range jsonObj.Bins {
-    var packedbins packingreults
         p := bp3d.NewPacker()
         p.AddBin(bp3d.NewBin(
         jsonObj.Bins[i].Name,
@@ -63,7 +62,7 @@ func test(w http.ResponseWriter, r *http.Request) {
         if err := p.Pack(); err != nil {
             log.Fatal(err)
         }
-            packingreults = append(packedbins, p)
+            packingreults = append(packingreults, p)
         }
 
 
