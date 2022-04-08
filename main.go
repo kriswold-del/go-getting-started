@@ -30,9 +30,7 @@ type Response struct {
 }
 
 
-type packingreults []struct {
-		result  bp3d.Packer   `json:"data"`
-}
+type packingreults []bp3d.Packer
 
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
@@ -65,13 +63,10 @@ func test(w http.ResponseWriter, r *http.Request) {
         if err := p.Pack(); err != nil {
             log.Fatal(err)
         }
-            packedbins = append(packedbins, p)
+            packingreults = append(packedbins, p)
         }
 
 
-	if err := p.Pack(); err != nil {
-		log.Fatal(err)
-	}
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
 
