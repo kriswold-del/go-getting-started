@@ -36,7 +36,9 @@ func test(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
     }
     json.Unmarshal(reqBody, &jsonObj)
-
+    sort.SliceStable(jsonObj.Bins, func(i, j int) bool {
+            return (jsonObj.Bins[i].Width * jsonObj.Bins[i].Height * jsonObj.Bins[i].Depth) < (jsonObj.Bins[J].Width * jsonObj.Bins[J].Height * jsonObj.Bins[J].Depth)
+    })
     for i := range jsonObj.Bins {
         p.AddBin(bp3d.NewBin(
         jsonObj.Bins[i].Name,
@@ -44,8 +46,6 @@ func test(w http.ResponseWriter, r *http.Request) {
         jsonObj.Bins[i].Height,
         jsonObj.Bins[i].Depth,
         jsonObj.Bins[i].Weight))
-
-        log.Println("Added bin " + jsonObj.Bins[i].Name)
     }
 
         for i := range jsonObj.Items {
@@ -55,7 +55,6 @@ func test(w http.ResponseWriter, r *http.Request) {
             jsonObj.Items[i].Height,
             jsonObj.Items[i].Depth,
             jsonObj.Items[i].Weight))
-            log.Println("Added Item " + jsonObj.Items[i].Name)
         }
 
 	if err := p.Pack(); err != nil {
@@ -63,6 +62,9 @@ func test(w http.ResponseWriter, r *http.Request) {
 	}
     w.Header().Set("Content-Type", "application/json")
     w.Header().Set("Access-Control-Allow-Origin", "*")
+
+
+
     json.NewEncoder(w).Encode(p)
     //log.Println(t.bins)
 }
