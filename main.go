@@ -29,6 +29,11 @@ type Response struct {
 	} `json:"items"`
 }
 
+
+type packingreults []struct {
+		result  bp3d.NewPacker()    `json:"data"`
+}
+
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
     p := bp3d.NewPacker()
@@ -41,14 +46,14 @@ func test(w http.ResponseWriter, r *http.Request) {
             return (jsonObj.Bins[i].Width * jsonObj.Bins[i].Height * jsonObj.Bins[i].Depth) > (jsonObj.Bins[j].Width * jsonObj.Bins[j].Height * jsonObj.Bins[j].Depth)
     })
     for i := range jsonObj.Bins {
+    var packedbins packingreults
+
         p.AddBin(bp3d.NewBin(
         jsonObj.Bins[i].Name,
         jsonObj.Bins[i].Width,
         jsonObj.Bins[i].Height,
         jsonObj.Bins[i].Depth,
         jsonObj.Bins[i].Weight))
-    }
-
         for i := range jsonObj.Items {
             p.AddItem(bp3d.NewItem(
             jsonObj.Items[i].Name,
@@ -57,6 +62,12 @@ func test(w http.ResponseWriter, r *http.Request) {
             jsonObj.Items[i].Depth,
             jsonObj.Items[i].Weight))
         }
+        if err := p.Pack(); err != nil {
+            log.Fatal(err)
+        }
+            packedbins = append(packedbins, p)
+        }
+
 
 	if err := p.Pack(); err != nil {
 		log.Fatal(err)
@@ -66,7 +77,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 
 
 
-    json.NewEncoder(w).Encode(p)
+    json.NewEncoder(w).Encode(packedbins)
     //log.Println(t.bins)
 }
 
