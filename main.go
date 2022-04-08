@@ -37,7 +37,7 @@ func test(w http.ResponseWriter, r *http.Request) {
     }
     json.Unmarshal(reqBody, &jsonObj)
     sort.SliceStable(jsonObj.Bins, func(i, j int) bool {
-            return (jsonObj.Bins[i].Width * jsonObj.Bins[i].Height * jsonObj.Bins[i].Depth) < (jsonObj.Bins[J].Width * jsonObj.Bins[J].Height * jsonObj.Bins[J].Depth)
+            return (jsonObj.Bins[i].Width * jsonObj.Bins[i].Height * jsonObj.Bins[i].Depth) < (jsonObj.Bins[j].Width * jsonObj.Bins[j].Height * jsonObj.Bins[j].Depth)
     })
     for i := range jsonObj.Bins {
         p.AddBin(bp3d.NewBin(
