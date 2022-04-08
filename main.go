@@ -31,12 +31,12 @@ type Response struct {
 
 
 type packingreults []struct {
-		result  bp3d.NewPacker()    `json:"data"`
+		result  bp3d.Packer   `json:"data"`
 }
 
 func test(w http.ResponseWriter, r *http.Request) {
     var jsonObj Response
-    p := bp3d.NewPacker()
+
     reqBody, err := ioutil.ReadAll(r.Body)
     if err != nil {
         log.Println(err.Error())
@@ -47,7 +47,7 @@ func test(w http.ResponseWriter, r *http.Request) {
     })
     for i := range jsonObj.Bins {
     var packedbins packingreults
-
+        p := bp3d.NewPacker()
         p.AddBin(bp3d.NewBin(
         jsonObj.Bins[i].Name,
         jsonObj.Bins[i].Width,
